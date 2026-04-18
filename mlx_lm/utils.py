@@ -4,6 +4,7 @@ import copy
 import glob
 import importlib
 import inspect
+from logging import getLogger
 import json
 import os
 import resource
@@ -41,6 +42,8 @@ from mlx.utils import tree_flatten, tree_map, tree_reduce, tree_unflatten
 from .tokenizer_utils import TokenizerWrapper
 from .tokenizer_utils import load as _load_tokenizer
 
+log = getLogger(__name__)
+
 # Constants
 MODEL_REMAPPING = {
     "mistral": "llama",
@@ -52,6 +55,7 @@ MODEL_REMAPPING = {
     "qwen2_5_vl": "qwen2_vl",
     "minimax_m2": "minimax",
     "iquestcoder": "llama",
+    "lizzy": "lizzy"
 }
 
 MAX_FILE_SIZE_GB = 5
@@ -338,6 +342,7 @@ def load_model(
         if "quantization_config" in text_config:
             config["quantization_config"] = text_config["quantization_config"]
 
+    print(f"Model config: {config}")
     model_args = model_args_class.from_dict(config)
 
     model = model_class(model_args)
@@ -487,7 +492,7 @@ def load(
         ValueError: If model class or args class are not found.
     """
     model_path = _download(path_or_hf_repo, revision=revision)
-
+    print(f"Model config: {model_config}")
     model, config = load_model(model_path, lazy, model_config=model_config)
     if adapter_path is not None:
         model = load_adapters(model, adapter_path)

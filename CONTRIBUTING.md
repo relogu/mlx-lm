@@ -8,9 +8,13 @@ possible.
 1. Fork and submit pull requests to the repo. 
 2. If you've added code that should be tested, add tests.
 3. Every PR should have passing tests and at least one review. 
-4. For code formatting install `pre-commit` using something like `pip install pre-commit` and run `pre-commit install`.
-   This should install hooks for running `black` and `clang-format` to ensure
-   consistent style for C++ and python code.
+4. For local development, sync the repo with `uv` and install the pre-commit hooks:
+   ```bash
+   uv sync
+   uv run pre-commit install
+   ```
+   This will install the project in editable mode along with the Python tooling
+   used for formatting and local checks.
  
    You can also run the formatters manually as follows on individual files:
  
@@ -19,20 +23,21 @@ possible.
      ```
  
      ```bash
-     black file.py
+     uv run black file.py
+     uv run isort --profile=black file.py
      ```
 
      or,
 
      ```bash
      # single file
-     pre-commit run --files file1.py 
+     uv run pre-commit run --files file1.py 
 
      # specific files
-     pre-commit run --files file1.py file2.py
+     uv run pre-commit run --files file1.py file2.py
      ```
  
-   or run `pre-commit run --all-files` to check all files in the repo.
+   or run `uv run pre-commit run --all-files` to check all files in the repo.
 
 ## Issues
 
@@ -51,7 +56,7 @@ Below are some tips to port LLMs available on Hugging Face to MLX.
 From this directory, do an editable install:
 
 ```shell
-pip install -e .
+uv sync
 ```
 
 Then check if the model has weights in the
@@ -86,5 +91,5 @@ tests](https://github.com/ml-explore/mlx-lm/blob/main/tests/test_models.py).
 You can run the tests with:
 
 ```shell
-python -m unittest discover tests/
+uv run python -m unittest discover tests/
 ```

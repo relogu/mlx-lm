@@ -14,11 +14,16 @@ class BaseModelArgs:
     def from_dict(cls, params):
         return cls(
             **{
-                k: v
+                _make_any_norms_eps_rms_norm_eps(k): v
                 for k, v in params.items()
-                if k in inspect.signature(cls).parameters
+                if _make_any_norms_eps_rms_norm_eps(k) in inspect.signature(cls).parameters
             }
         )
+
+def _make_any_norms_eps_rms_norm_eps(key: str) -> str:
+    if "norm_eps" in key:
+        return "rms_norm_eps"
+    return key
 
 
 def create_causal_mask(

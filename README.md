@@ -27,6 +27,12 @@ pip install mlx-lm
 conda install -c conda-forge mlx-lm
 ```
 
+**From source with `uv`**:
+
+```sh
+uv sync
+```
+
 ### Quick Start
 
 To generate text with an LLM use:
