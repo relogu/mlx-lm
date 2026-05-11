@@ -12,7 +12,7 @@ license-files = ["LICENSE"]
 authors = [{ name = "MLX Contributors", email = "mlx@group.apple.com" }]
 dynamic = ["version"]
 dependencies = [
-    "mlx>=0.30.4; platform_system == 'Darwin'",
+    "mlx>=0.31.2; platform_system == 'Darwin'",
     "numpy",
     "transformers>=5.0.0",
     "sentencepiece",
