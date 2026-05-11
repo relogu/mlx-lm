@@ -30,9 +30,9 @@ Issues = "https://github.com/ml-explore/mlx-lm/issues"
 test = ["datasets", "lm-eval"]
 train = ["datasets", "tqdm"]
 evaluate = ["lm-eval", "tqdm"]
-cuda13 = ["mlx[cuda13]>=0.30.4"]
-cuda12 = ["mlx[cuda12]>=0.30.4"]
-cpu = ["mlx[cpu]>=0.30.4"]
+# cuda13 = ["mlx[cuda13]>=0.31.2"]
+# cuda12 = ["mlx[cuda12]>=0.31.2"]
+# cpu = ["mlx[cpu]>=0.31.2"]
 
 [project.scripts]
 mlx_lm = "mlx_lm.cli:main"
